@@ -11,7 +11,8 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Ubuntu:wght@300;400;700&display=swap');
+    font-family: Ubuntu, sans-serif;
     background: ${colors.primaryDarkColor};
     color: ${colors.primaryDarkColor};
   }
