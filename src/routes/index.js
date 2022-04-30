@@ -10,7 +10,7 @@ export default function App() {
   return (
     <Switch>
       <MyRoute exact path="/" component={Index} />
-      <MyRoute exact path="/login" component={Login} />
+      <MyRoute path="/login" component={Login} />
       <MyRoute path="*" component={Page404} />
     </Switch>
   );

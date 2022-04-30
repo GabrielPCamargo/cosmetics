@@ -1,29 +1,26 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { Container } from '../../styles/GlobalStyles';
-import { Title } from './styled';
-import * as exampleActions from '../../store/modules/example/actions';
+import Footer from '../../components/Footer';
+import { Container, Form } from './styled';
 
 export default function Login() {
-  const dispatch = useDispatch();
-
-  function handleClick(e) {
-    e.preventDefault();
-
-    dispatch(exampleActions.clicaBotaoRequest());
-  }
-
   return (
-    <Container>
-      <Title>
-        Login
-        <small>Oie</small>
-      </Title>
-      <p>Lorem ipsum dolor sit amet, consectetur adip</p>
-      <button type="button" onClick={handleClick}>
-        Enviar
-      </button>
-    </Container>
+    <>
+      <Container>
+        <Form>
+          <h3>Login</h3>
+          <input placeholder="E-mail" name="email" type="email" />
+          <input placeholder="Senha" name="password" type="password" />
+          <button type="submit">Entrar</button>
+        </Form>
+
+        <h4>Ainda não possui cadastro?</h4>
+        <Link to="/register">
+          <button type="button">Cadastrar-se</button>
+        </Link>
+      </Container>
+      <Footer />
+    </>
   );
 }
