@@ -13,7 +13,7 @@ export default createGlobalStyle`
   body {
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Ubuntu:wght@300;400;700&display=swap');
     font-family: Ubuntu, sans-serif;
-    background: ${colors.primaryDarkColor};
+    background: ${colors.background};
     color: ${colors.primaryDarkColor};
   }
 
