@@ -27,5 +27,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'default-param-last': 0,
     '(jsx-a11y/label-has-associated-control': 0,
+    'no-nonoctal-decimal-escape': 0,
   },
 };
