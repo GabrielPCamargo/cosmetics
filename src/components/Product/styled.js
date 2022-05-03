@@ -38,4 +38,22 @@ export const Container = styled.div`
     font-size: 1.15em;
     padding: 0.75em 1.25em;
   }
+
+  .functions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .functions a {
+    margin: 0.75em 2em;
+  }
+
+  .edit {
+    color: #85d336;
+  }
+
+  .delete {
+    color: #c30e02;
+  }
 `;
