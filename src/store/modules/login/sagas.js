@@ -9,10 +9,11 @@ import * as types from '../types';
 
 function* loginRequest({ payload }) {
   try {
-    const response = yield call(axios.post, '/token', payload);
-    yield put(actions.loginSuccess({ ...response.data }));
+    const { data } = yield call(axios.post, '/token', payload);
+    const { token, email, id } = data;
+    yield put(actions.loginSuccess({ token, user: { email, id } }));
 
-    axios.headers = `Bearer ${response.data.token}`;
+    axios.headers = `Bearer ${token}`;
 
     toast.success('Login realizado com sucesso');
     history.push('/myproducts');
