@@ -83,4 +83,8 @@ export const Form = styled.form`
     font-weight: 500;
     font-size: 1.3em;
   }
+
+  svg {
+    margin-top: 4em;
+  }
 `;

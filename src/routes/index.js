@@ -21,6 +21,11 @@ export default function App() {
         isClosed
         component={MyProductsRegister}
       />
+      <MyRoute
+        path="/myproducts/:id/edit"
+        isClosed
+        component={MyProductsRegister}
+      />
       <MyRoute path="*" component={Page404} />
     </Switch>
   );
