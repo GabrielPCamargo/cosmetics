@@ -38,3 +38,9 @@ export const NewProduct = styled.div`
     margin-right: 0.75em;
   }
 `;
+
+export const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 121px);
+`;

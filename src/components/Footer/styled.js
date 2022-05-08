@@ -14,4 +14,5 @@ export const Container = styled.div`
   font-style: normal;
   font-weight: 700;
   font-size: 1.5em;
+  margin-top: auto;
 `;

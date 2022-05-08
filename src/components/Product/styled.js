@@ -45,7 +45,10 @@ export const Container = styled.div`
     justify-content: space-between;
   }
 
-  .functions a {
+  .functions button {
+    margin: 0;
+    padding: 0;
+    background: inherit;
     margin: 0.75em 2em;
   }
 

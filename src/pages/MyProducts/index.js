@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import Product from '../../components/Product';
 import Footer from '../../components/Footer';
 
-import { Container, Title, NewProduct } from './styled';
+import { Container, Title, NewProduct, Flex } from './styled';
 
 import axios from '../../services/axios';
 
@@ -20,19 +20,24 @@ export default function MyProductRegister() {
     async function getData() {
       try {
         const { data } = await axios.get(`/users/${id}/products`);
-        console.log(data);
         setProducts(data);
       } catch (err) {
-        console.log(err.response);
-        err.errors.map((error) => toast.error(error));
+        err.response.data.errors.map((error) => toast.error(error));
       }
     }
 
     getData();
-  }, []);
+  }, [products, id]);
+
+  const handleUpdateOnDelete = (productId) => {
+    const updatedProducts = products.filter(
+      (product) => product.id !== productId
+    );
+    setProducts(updatedProducts);
+  };
 
   return (
-    <>
+    <Flex>
       <Title>Meus produtos cadastrados</Title>
 
       <NewProduct>
@@ -43,11 +48,16 @@ export default function MyProductRegister() {
       </NewProduct>
 
       <Container>
-        {products.map((product) => (
-          <Product key={product.id} {...product} />
-        ))}
+        {products &&
+          products.map((product) => (
+            <Product
+              key={product.id}
+              {...product}
+              handleUpdateOnDelete={handleUpdateOnDelete}
+            />
+          ))}
       </Container>
       <Footer />
-    </>
+    </Flex>
   );
 }
