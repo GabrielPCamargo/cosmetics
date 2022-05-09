@@ -7,6 +7,7 @@ export const Container = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 40px;
   overflow: hidden;
+  margin-bottom: 3em;
 
   &:nth-child(n + 4) {
     margin-top: 5em;

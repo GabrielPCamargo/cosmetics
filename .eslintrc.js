@@ -28,5 +28,7 @@ module.exports = {
     'default-param-last': 0,
     '(jsx-a11y/label-has-associated-control': 0,
     'no-nonoctal-decimal-escape': 0,
+    camelcase: 0,
+    'react/jsx-no-useless-fragment': 0,
   },
 };

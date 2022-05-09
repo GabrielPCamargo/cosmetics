@@ -10,24 +10,30 @@ import Footer from '../../components/Footer';
 import { Container, Title, NewProduct, Flex } from './styled';
 
 import axios from '../../services/axios';
+import Loading from '../../components/Loading';
 
 export default function MyProductRegister() {
   const id = useSelector((state) => state.login.user.id);
 
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function getData() {
+      setIsLoading(true);
       try {
         const { data } = await axios.get(`/users/${id}/products`);
         setProducts(data);
+
+        setIsLoading(false);
       } catch (err) {
         err.response.data.errors.map((error) => toast.error(error));
+        setIsLoading(false);
       }
     }
 
     getData();
-  }, [products, id]);
+  }, []);
 
   const handleUpdateOnDelete = (productId) => {
     const updatedProducts = products.filter(
@@ -38,6 +44,7 @@ export default function MyProductRegister() {
 
   return (
     <Flex>
+      <Loading isLoading={isLoading} />
       <Title>Meus produtos cadastrados</Title>
 
       <NewProduct>

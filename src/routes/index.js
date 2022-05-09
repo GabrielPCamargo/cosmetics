@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 import MyRoute from './MyRoute';
 import Login from '../pages/Login';
 import Index from '../pages/Index';
+import Product from '../pages/Product';
 import Register from '../pages/Register';
 import MyProducts from '../pages/MyProducts';
 import MyProductsRegister from '../pages/MyProductRegister';
@@ -26,6 +27,7 @@ export default function App() {
         isClosed
         component={MyProductsRegister}
       />
+      <MyRoute path="/products/:id" isClosed component={Product} />
       <MyRoute path="*" component={Page404} />
     </Switch>
   );

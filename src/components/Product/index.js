@@ -28,8 +28,11 @@ export default function Product({
   title,
   price,
   id,
+  user_id,
   handleUpdateOnDelete,
 }) {
+  const userLoggedId = useSelector((state) => state.login.user.id);
+
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -61,6 +64,10 @@ export default function Product({
     }
   };
 
+  const handleEdit = () => {
+    history.push(`/myproducts/${id}/edit`);
+  };
+
   return (
     <Container>
       <ReactModal style={customStyles} isOpen={isModalOpen}>
@@ -79,9 +86,9 @@ export default function Product({
       <img src={image} alt="img" />
       <h3>{title}</h3>
       <div>R${price}</div>
-      {isLoggedIn ? (
+      {isLoggedIn && user_id === userLoggedId ? (
         <div className="functions">
-          <button type="button" className="edit">
+          <button type="button" className="edit" onClick={handleEdit}>
             <FaEdit size={25} />
           </button>
           <button type="button" className="delete" onClick={handleDelete}>
@@ -102,6 +109,7 @@ Product.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  user_id: PropTypes.number.isRequired,
   handleUpdateOnDelete: PropTypes.func,
 };
 
