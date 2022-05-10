@@ -84,7 +84,9 @@ export default function Product({
         </div>
       </ReactModal>
       <img src={image} alt="img" />
-      <h3>{title}</h3>
+      <h3 onClick={handleSeeProduct} onKeyPress={handleSeeProduct}>
+        {title}
+      </h3>
       <div>R${price}</div>
       {isLoggedIn && user_id === userLoggedId ? (
         <div className="functions">
