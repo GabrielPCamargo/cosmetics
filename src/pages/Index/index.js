@@ -12,7 +12,17 @@ import { Container, Flex } from './styled';
 
 export default function Index() {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    setFilteredProducts(
+      products.filter((product) =>
+        product.title.toLowerCase().includes(search.toLocaleLowerCase())
+      )
+    );
+  }, [search]);
 
   useEffect(() => {
     async function getData() {
@@ -20,6 +30,7 @@ export default function Index() {
       try {
         const response = await axios.get('/products');
         setProducts(response.data);
+        setFilteredProducts(response.data);
         setIsLoading(false);
       } catch (err) {
         err.errors.map((error) => toast.error(error));
@@ -33,9 +44,12 @@ export default function Index() {
   return (
     <Flex>
       <Loading isLoading={isLoading} />
-      <SearchBar />
+      <SearchBar
+        handleValue={search}
+        handleOnChange={(e) => setSearch(e.target.value)}
+      />
       <Container>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <Product key={product.id} {...product} />
         ))}
       </Container>
