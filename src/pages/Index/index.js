@@ -19,6 +19,8 @@ export default function Index() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
 
+  const itemsPerPage = 9;
+
   useEffect(() => {
     setFilteredProducts(
       products.filter((product) =>
@@ -33,13 +35,14 @@ export default function Index() {
       try {
         const response = await await axios.get('/products', {
           params: {
-            offset: 6 * (page - 1),
-            limit: 6,
+            offset: itemsPerPage * (page - 1),
+            limit: itemsPerPage,
           },
         });
         setTotalProducts(response.data.count);
         setProducts(response.data.rows);
         setFilteredProducts(response.data.rows);
+        window.scrollTo(0, 0);
         setIsLoading(false);
       } catch (err) {
         err.errors.map((error) => toast.error(error));
@@ -65,7 +68,7 @@ export default function Index() {
       <Pagination
         totalItems={totalProducts}
         setPage={setPage}
-        itemsPerPage={6}
+        itemsPerPage={itemsPerPage}
       />
       <Footer />
     </Flex>

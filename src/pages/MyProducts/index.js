@@ -11,19 +11,30 @@ import { Container, Title, NewProduct, Flex } from './styled';
 
 import axios from '../../services/axios';
 import Loading from '../../components/Loading';
+import Pagination from '../../components/Pagination';
 
 export default function MyProductRegister() {
   const id = useSelector((state) => state.login.user.id);
 
   const [products, setProducts] = useState([]);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+
+  const postsPerPage = 9;
 
   useEffect(() => {
     async function getData() {
       setIsLoading(true);
       try {
-        const { data } = await axios.get(`/users/${id}/products`);
-        setProducts(data);
+        const { data } = await axios.get(`/users/${id}/products`, {
+          params: {
+            offset: postsPerPage * (page - 1),
+            limit: postsPerPage,
+          },
+        });
+        setProducts(data.rows);
+        setTotalProducts(data.count);
 
         setIsLoading(false);
       } catch (err) {
@@ -33,7 +44,7 @@ export default function MyProductRegister() {
     }
 
     getData();
-  }, []);
+  }, [page]);
 
   const handleUpdateOnDelete = (productId) => {
     const updatedProducts = products.filter(
@@ -64,6 +75,11 @@ export default function MyProductRegister() {
             />
           ))}
       </Container>
+      <Pagination
+        totalItems={totalProducts}
+        setPage={setPage}
+        itemsPerPage={postsPerPage}
+      />
       <Footer />
     </Flex>
   );
