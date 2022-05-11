@@ -54,7 +54,7 @@ export default function ProductPage({ match }) {
             </p>
             <p className="phone_number">
               <FaPhoneAlt size={48} />
-              Telefone: {product.user.number}
+              Telefone: {product.user.phone_number}
             </p>
           </div>
         </ProductContainer>

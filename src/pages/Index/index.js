@@ -9,11 +9,14 @@ import Footer from '../../components/Footer';
 import axios from '../../services/axios';
 
 import { Container, Flex } from './styled';
+import Pagination from '../../components/Pagination';
 
 export default function Index() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [totalProducts, setTotalProducts] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -28,9 +31,15 @@ export default function Index() {
     async function getData() {
       setIsLoading(true);
       try {
-        const response = await axios.get('/products');
-        setProducts(response.data);
-        setFilteredProducts(response.data);
+        const response = await await axios.get('/products', {
+          params: {
+            offset: 6 * (page - 1),
+            limit: 6,
+          },
+        });
+        setTotalProducts(response.data.count);
+        setProducts(response.data.rows);
+        setFilteredProducts(response.data.rows);
         setIsLoading(false);
       } catch (err) {
         err.errors.map((error) => toast.error(error));
@@ -39,7 +48,7 @@ export default function Index() {
     }
 
     getData();
-  }, []);
+  }, [page]);
 
   return (
     <Flex>
@@ -53,6 +62,11 @@ export default function Index() {
           <Product key={product.id} {...product} />
         ))}
       </Container>
+      <Pagination
+        totalItems={totalProducts}
+        setPage={setPage}
+        itemsPerPage={6}
+      />
       <Footer />
     </Flex>
   );
